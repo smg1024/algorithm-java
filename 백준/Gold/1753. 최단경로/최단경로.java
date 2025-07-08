@@ -17,7 +17,7 @@ public class Main {
     static ArrayList<Node>[] adjArr;
     static int V, E, K;
     static int[] D;
-    static boolean[] visited;
+//    static boolean[] visited;
     
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -29,12 +29,13 @@ public class Main {
         K = Integer.parseInt(br.readLine());
         
         adjArr = new ArrayList[V + 1];
-        visited = new boolean[V + 1];
+//        visited = new boolean[V + 1];
         D = new int[V + 1];
-         
-        for(int i = 1; i <= V; i++) {
+        
+        Arrays.fill(D, Integer.MAX_VALUE);
+        
+        for(int i = 0; i <= V; i++) {
             adjArr[i] = new ArrayList<>();
-            D[i] = Integer.MAX_VALUE;
         }
         
         for(int i = 0; i < E; i++) {
@@ -53,10 +54,10 @@ public class Main {
         
         while(!queue.isEmpty()) {
             Node current = queue.poll();
-            if(!visited[current.destination]) visited[current.destination] = true;
+//            if(!visited[current.destination]) visited[current.destination] = true;
             
             for(Node next : adjArr[current.destination]) {
-                if(!visited[next.destination] && current.distance + next.distance < D[next.destination]) {
+                if(D[current.destination] + next.distance < D[next.destination]) {
                     D[next.destination] = current.distance + next.distance;
                     queue.add(new Node(next.destination, D[next.destination]));
                 }
